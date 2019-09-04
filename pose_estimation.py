@@ -1,6 +1,3 @@
-# 3. Estimate pose from your webcam
-# ====================================
-
 from __future__ import division
 import argparse, time, logging, os, math, tqdm, cv2
 
@@ -40,7 +37,7 @@ detector.reset_class(classes=['person'], reuse_weights={'person':'person'})
 estimator = get_model('simple_pose_resnet18_v1b', pretrained='ccd24037', ctx=ctx)
 
 # Acessing webcam.
-
+#cap = cv2.VideoCapture('soccer_low.mp4')
 cap = cv2.VideoCapture(0)
 time.sleep(1)  ### letting the camera autofocus
 
@@ -78,6 +75,7 @@ while(True):
 
         img = cv_plot_keypoints(frame, pred_coords, confidence, class_IDs, bounding_boxs, scores, 
                                 box_thresh=1.99, keypoint_thresh=0.2)
+    print(bounding_boxs)
     cv_plot_image(img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
